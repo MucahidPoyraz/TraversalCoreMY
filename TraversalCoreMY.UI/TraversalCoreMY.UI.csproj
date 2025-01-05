@@ -8,4 +8,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TraversalCoreMY.DAL\TraversalCoreMY.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
