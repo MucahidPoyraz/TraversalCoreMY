@@ -26,9 +26,9 @@ namespace TraversalCoreMY.BL.Concrete
             throw new NotImplementedException();
         }
 
-        public Task<List<T>> GetAllBLAsync()
+        public async Task<List<T>> GetAllBLAsync()
         {
-            throw new NotImplementedException();
+            return await _genericDal.GetAllDALAsync();
         }
 
         public Task<T> GetByIdBLAsync(int id)

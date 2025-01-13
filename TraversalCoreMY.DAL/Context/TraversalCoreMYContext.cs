@@ -7,9 +7,9 @@ namespace TraversalCoreMY.DAL.Context
 {
     public class TraversalCoreMYContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public TraversalCoreMYContext(DbContextOptions<TraversalCoreMYContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=MUCAHID\MSSQLSERVER01;Database=TraversalCoreMYContextDB;Trusted_Connection=True;TrustServerCertificate=True;");
+
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Guide> Guides { get; set; }

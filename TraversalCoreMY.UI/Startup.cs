@@ -4,7 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using TraversalCoreMY.BL.Abstract;
+using TraversalCoreMY.BL.Concrete;
+using TraversalCoreMY.DAL.Abstract;
 using TraversalCoreMY.DAL.Context;
+using TraversalCoreMY.DAL.Repository;
 
 namespace TraversalCoreMY.UI
 {
@@ -20,7 +25,27 @@ namespace TraversalCoreMY.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();         
+            services.AddDbContext<TraversalCoreMYContext>(opt =>
+            {
+                opt.UseSqlServer(Configuration.GetConnectionString("Local"));
+            });
+            // Add Scoped Services
+            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
+            services.AddScoped(typeof(IGenericDal<>), typeof(GenericDal<>));
+
+            // Add MVC
+            services.AddControllersWithViews();
+
+            // Example: Add CORS policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
+            // Add other necessary services...
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,10 +61,13 @@ namespace TraversalCoreMY.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors("AllowAll"); // Use CORS policy
 
             app.UseAuthorization();
 
