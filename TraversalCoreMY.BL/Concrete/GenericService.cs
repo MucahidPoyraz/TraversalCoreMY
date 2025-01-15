@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TraversalCoreMY.BL.Abstract;
 using TraversalCoreMY.DAL.Abstract;
@@ -29,6 +30,11 @@ namespace TraversalCoreMY.BL.Concrete
         public async Task<List<T>> GetAllBLAsync()
         {
             return await _genericDal.GetAllDALAsync();
+        }
+
+        public async Task<List<T>> GetAllBLAsync(Expression<Func<T, bool>> filter)
+        {
+             return await _genericDal.GetAllDALAsync(filter);
         }
 
         public Task<T> GetByIdBLAsync(int id)

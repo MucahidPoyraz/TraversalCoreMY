@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TraversalCoreMY.BL.Abstract;
-using TraversalCoreMY.Entity.Concrete.Home;
+using TraversalCoreMY.Entity.Concrete.Blog;
 
 namespace TraversalCoreMY.UI.ViewComponents.Home
 {

@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using TraversalCoreMY.BL.Abstract;
 using TraversalCoreMY.BL.Concrete;
 using TraversalCoreMY.DAL.Abstract;

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraversalCoreMY.DAL.Context;
 
 namespace TraversalCoreMY.DAL.Migrations
 {
     [DbContext(typeof(TraversalCoreMYContext))]
-    partial class TraversalCoreMYContextModelSnapshot : ModelSnapshot
+    [Migration("20250114095354_CommentAdd")]
+    partial class CommentAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

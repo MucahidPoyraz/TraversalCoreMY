@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TraversalCoreMY.Entity.Concrete;
 
@@ -10,6 +12,7 @@ namespace TraversalCoreMY.BL.Abstract
         Task<T> UpdateBLAsync(T entity);
         Task DeleteBLAsync(T entity);
         Task<List<T>> GetAllBLAsync();
+        Task<List<T>> GetAllBLAsync(Expression<Func<T, bool>> filter);
         Task<T> GetByIdBLAsync(int id);
     }
 }

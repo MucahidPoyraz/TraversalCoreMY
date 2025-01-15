@@ -1,4 +1,6 @@
-﻿namespace TraversalCoreMY.Entity.Concrete.Home
+﻿using System.Collections.Generic;
+
+namespace TraversalCoreMY.Entity.Concrete.Blog
 {
     public class Destination : BaseEntity
     {
@@ -12,5 +14,10 @@
         public string Description { get; set; }
         public int Capacity { get; set; }
         public bool IsActive { get; set; }
+        public string CoverImage { get; set; }
+        public string ManinDetail { get; set; }
+        public string SecondaryDetail { get; set; }
+        public string SecondaryImage { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }
