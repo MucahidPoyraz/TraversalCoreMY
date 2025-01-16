@@ -10,7 +10,7 @@ using TraversalCoreMY.Entity.Concrete;
 
 namespace TraversalCoreMY.DAL.Repository
 {
-    public class GenericDal<T> : IGenericDal<T> where T : BaseEntity, new()
+    public class GenericDal<T> : IGenericDal<T> where T : class, new()
     {
         private readonly TraversalCoreMYContext _context;
 

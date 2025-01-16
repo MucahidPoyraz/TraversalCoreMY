@@ -1,6 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +10,8 @@ using TraversalCoreMY.BL.Concrete;
 using TraversalCoreMY.DAL.Abstract;
 using TraversalCoreMY.DAL.Context;
 using TraversalCoreMY.DAL.Repository;
+using TraversalCoreMY.Entity.Concrete.User;
+using TraversalCoreMY.UI.ValidationRules;
 
 namespace TraversalCoreMY.UI
 {
@@ -24,16 +27,23 @@ namespace TraversalCoreMY.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TraversalCoreMYContext>(opt =>
-            {
-                opt.UseSqlServer(Configuration.GetConnectionString("Local"));
-            });
+            services.AddDbContext<TraversalCoreMYContext>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<TraversalCoreMYContext>()
+                .AddErrorDescriber<CustomIdentityValidation>().AddEntityFrameworkStores<TraversalCoreMYContext>();
             // Add Scoped Services
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
             services.AddScoped(typeof(IGenericDal<>), typeof(GenericDal<>));
 
             // Add MVC
             services.AddControllersWithViews();
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddMvc();
 
             // Example: Add CORS policy
             services.AddCors(options =>
@@ -63,7 +73,7 @@ namespace TraversalCoreMY.UI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseCors("AllowAll"); // Use CORS policy

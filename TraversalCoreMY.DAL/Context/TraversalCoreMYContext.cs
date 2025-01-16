@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TraversalCoreMY.Entity.Concrete.About;
 using TraversalCoreMY.Entity.Concrete.Blog;
 using TraversalCoreMY.Entity.Concrete.Concact;
 using TraversalCoreMY.Entity.Concrete.Home;
+using TraversalCoreMY.Entity.Concrete.User;
 
 namespace TraversalCoreMY.DAL.Context
 {
-    public class TraversalCoreMYContext : DbContext
+    public class TraversalCoreMYContext : IdentityDbContext<AppUser,AppRole,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

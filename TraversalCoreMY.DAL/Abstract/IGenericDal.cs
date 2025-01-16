@@ -6,7 +6,7 @@ using TraversalCoreMY.Entity.Concrete;
 
 namespace TraversalCoreMY.DAL.Abstract
 {
-    public interface IGenericDal<T> where T : BaseEntity, new()
+    public interface IGenericDal<T> where T : class, new()
     {
         Task<List<T>> GetAllDALAsync();
         Task<List<T>> GetAllDALAsync(Expression<Func<T, bool>> filter);
