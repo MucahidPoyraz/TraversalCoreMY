@@ -6,7 +6,7 @@ using TraversalCoreMY.Entity.Concrete;
 
 namespace TraversalCoreMY.BL.Abstract
 {
-    public interface IGenericService<T> where T : BaseEntity, new()
+    public interface IGenericService<T> where T : class, new()
     {
         Task<T> CreateBLAsync(T entity);
         Task<T> UpdateBLAsync(T entity);

@@ -4,11 +4,10 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TraversalCoreMY.BL.Abstract;
 using TraversalCoreMY.DAL.Abstract;
-using TraversalCoreMY.Entity.Concrete;
 
 namespace TraversalCoreMY.BL.Concrete
 {
-    public class GenericService<T> : IGenericService<T> where T : BaseEntity, new()
+    public class GenericService<T> : IGenericService<T> where T : class, new()
     {
         private readonly IGenericDal<T> _genericDal;
 
@@ -34,7 +33,7 @@ namespace TraversalCoreMY.BL.Concrete
 
         public async Task<List<T>> GetAllBLAsync(Expression<Func<T, bool>> filter)
         {
-             return await _genericDal.GetAllDALAsync(filter);
+            return await _genericDal.GetAllDALAsync(filter);
         }
 
         public Task<T> GetByIdBLAsync(int id)
